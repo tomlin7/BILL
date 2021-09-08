@@ -12,7 +12,7 @@
 	- cmd
 		- `docker run --rm -it -v "%cd%":/root/env bill-buildenv`
 	- pwsh
-		- `docker run --rm -it -v "%cd%":/root/env bill-buildenv`
+		- `docker run --rm -it -v "${pwd}:/root/env" myos-buildenv`
 - Build
 	- `make build-x86_64`
 
