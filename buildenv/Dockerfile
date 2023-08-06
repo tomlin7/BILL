@@ -12,7 +12,7 @@ RUN curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.35.1.tar.gz
 RUN tar xf binutils-2.35.1.tar.gz
 RUN mkdir binutils-build
 RUN cd binutils-build
-RUN ../binutils-2.35.1/configure --target=$TARGET --enable-interwork --enable-multilib --disable-nls --disable-werror --prefix=$PREFIX 2>&1 | tee configure.log
+RUN ../binutils-2.35.1/configure --disable-multilib --target=$TARGET --enable-interwork --disable-nls --disable-werror --prefix=$PREFIX 2>&1 | tee configure.log
 RUN sudo make all install 2>&1 | tee make.log
 RUN cd /tmp/src
 RUN curl -O https://ftp.gnu.org/gnu/gcc/gcc-10.2.0/gcc-10.2.0.tar.gz
