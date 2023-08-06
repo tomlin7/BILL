@@ -17,10 +17,9 @@ jobs:
     - name: Build the Docker image
       run: docker build buildenv -t bill-buildenv
 
-    # - name: Build
-    #   run: |
-    #     docker run --rm -it -v "${pwd}:/root/env" bill-buildenv
-    #     make build-x86_64
+    - name: Build
+      run: |
+        docker run --rm -v "$(pwd):/root/env" bill-buildenv make build-x86_64
         
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
