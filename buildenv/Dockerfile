@@ -1,6 +1,7 @@
 FROM ubuntu
 
-RUN sudo apt update
+RUN apt update
+RUN apt install sudo
 RUN sudo apt install build-essential bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo -y
 RUN export PREFIX="/usr/local/x86_64elfgcc"
 RUN export TARGET=x86_64-elf
