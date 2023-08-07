@@ -10,3 +10,5 @@ VOLUME /root/env
 WORKDIR /root/env
 RUN echo "hii"
 RUN echo "$PWD"
+
+CMD ["/bin/bash"]
