@@ -23,7 +23,7 @@ jobs:
 
     - name: Build iso
       run: |
-        docker run --rm -v "$(pwd):/root/env" bill-buildenv /bin/bash -c "build.sh"
+        docker run --rm -v "$(pwd):/root/env" bill-buildenv /bin/bash -c "./build.sh"
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
