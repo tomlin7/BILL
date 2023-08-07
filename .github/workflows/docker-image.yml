@@ -16,10 +16,15 @@ jobs:
     - name: Docker env
       run: docker build . -t bill-buildenv
 
+    - name: List files and permissions
+      run: |
+       ls -l
+       chmod +x build.sh
+
     - name: Build iso
       run: |
-        docker run --rm -v "$(pwd):/root/env" bill-buildenv set -x && ./build.sh
-        
+        docker run --rm -v "$(pwd):/root/env" bill-buildenv build.sh
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
