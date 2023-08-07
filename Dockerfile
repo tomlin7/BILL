@@ -8,5 +8,3 @@ RUN apt-get install -y xorriso build-essential
 
 VOLUME /root/env
 WORKDIR /root/env
-
-RUN set -x && sudo ./build.sh
