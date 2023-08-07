@@ -1,5 +1,4 @@
 override MAKEFLAGS += -rR
-
 override KERNEL := bill.elf
  
 define DEFAULT_VAR =
@@ -66,24 +65,27 @@ override NASMFLAGS += \
     -Wall \
     -f elf64
  
-override CFILES := $(shell find -L . -type f -name '*.c' | grep -v 'limine/')
-override ASFILES := $(shell find -L . -type f -name '*.S' | grep -v 'limine/')
-override NASMFILES := $(shell find -L . -type f -name '*.asm' | grep -v 'limine/')
+override CFILES := $(shell find -L . -type f -name '*.c')
+override ASFILES := $(shell find -L . -type f -name '*.S')
+override NASMFILES := $(shell find -L . -type f -name '*.asm')
 override OBJ := $(CFILES:.c=.c.o) $(ASFILES:.S=.S.o) $(NASMFILES:.asm=.asm.o)
 override HEADER_DEPS := $(CFILES:.c=.c.d) $(ASFILES:.S=.S.d)
  
 .PHONY: all
 all: $(KERNEL)
  
+limine.h:
+	curl -Lo $@ https://github.com/limine-bootloader/limine/raw/trunk/limine.h
+
 $(KERNEL): $(OBJ)
 	$(LD) $(OBJ) $(LDFLAGS) -o $@
  
 -include $(HEADER_DEPS)
  
-%.c.o: %.c
+%.c.o: %.c limine.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
  
-%.S.o: %.S
+%.S.o: %.S limine.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
  
 %.asm.o: %.asm
@@ -92,3 +94,7 @@ $(KERNEL): $(OBJ)
 .PHONY: clean
 clean:
 	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS)
+
+.PHONY: distclean
+distclean: clean
+	rm -f limine.h
