@@ -8,3 +8,5 @@ RUN apt-get install -y xorriso build-essential
 
 VOLUME /root/env
 WORKDIR /root/env
+RUN echo "hii"
+RUN echo "$PWD"

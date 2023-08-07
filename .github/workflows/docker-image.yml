@@ -13,15 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Docker env
       run: docker build . -t bill-buildenv
 
-    - name: Build
+    - name: Build iso
       run: |
-        docker run --rm -v "$(pwd):/root/env" bill-buildenv sudo ./build.sh
+        docker run --rm -v "$(pwd):/root/env" bill-buildenv set -x && ./build.sh
         
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
           name: "BILL-barebones"
-          path: "dist/"
+          path: "."
