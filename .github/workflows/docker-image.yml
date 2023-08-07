@@ -18,7 +18,7 @@ jobs:
 
     - name: Build
       run: |
-        docker run --rm -v "$(pwd):/root/env" bill-buildenv ./build.sh
+        docker run --rm -v "$(pwd):/root/env" bill-buildenv sudo ./build.sh
         
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
