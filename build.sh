@@ -1,4 +1,11 @@
+echo "immaaaa print em allll AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA first"
+pwd
+cd kernel
 make
+cp -v bill.elf ..
+cd ..
+echo "immaaaa print em allll AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA second"
+ls
 git clone https://github.com/limine-bootloader/limine.git --branch=v5.x-branch-binary --depth=1
 make -C limine
 mkdir -p iso_root
