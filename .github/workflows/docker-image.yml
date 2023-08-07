@@ -9,20 +9,24 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build buildenv -t bill-buildenv
+    - name: Docker env
+      run: docker build . -t bill-buildenv
 
-    - name: Build
+    - name: List files and permissions
       run: |
-        docker run --rm -v "$(pwd):/root/env" bill-buildenv make build-x86_64
-        
+       ls -l
+       chmod +x build.sh
+
+    - name: Build iso
+      run: |
+        docker run --rm -v "$(pwd):/root/env" bill-buildenv /bin/bash -c "./build.sh"
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-          name: "BILL-nightly"
-          path: "dist/"
+          name: "BILL-barebones"
+          path: "."
