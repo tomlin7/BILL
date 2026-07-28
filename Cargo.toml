@@ -2,6 +2,7 @@
 name = "bill"
 version = "0.1.0"
 edition = "2021"
+authors = ["tomlin7 <hello@tomlin7.com>"]
 
 [dependencies]
 
