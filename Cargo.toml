@@ -1,14 +1,19 @@
 [package]
 name = "bill"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["tomlin7 <hello@tomlin7.com>"]
 
 [dependencies]
-
+bootloader = "0.9"
 
 [profile.dev]
 panic = "abort"
 
 [profile.release]
 panic = "abort"
+
+[[bin]]
+name = "bill"
+test = false
+bench = false

@@ -1,0 +1,10 @@
+[unstable]
+json-target-spec = true
+build-std-features = ["compiler-builtins-mem"]
+build-std = ["core", "alloc", "compiler_builtins"]
+
+[build]
+target = "x86_64-bill.json"
+
+[target.'cfg(target_os = "none")']
+runner = "bootimage runner"
