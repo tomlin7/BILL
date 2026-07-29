@@ -20,9 +20,12 @@ fn kernel_main(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
         kernel::vga_buffer::init(offset, boot_info.framebuffer.take());
     }
     kernel::serial::init();
+    kernel::init();
 
     use core::fmt::Write;
     write!(kernel::vga_buffer::WRITER.lock().as_mut().unwrap(), "Hello World!").unwrap();
+
+    x86_64::instructions::interrupts::int3();
 
     #[cfg(test)]
     test_main();
