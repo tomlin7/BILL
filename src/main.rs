@@ -1,25 +1,29 @@
-#![no_std]
-#![no_main]
+use std::path::PathBuf;
+use std::process::Command;
 
-use core::panic::PanicInfo;
+fn main() {
+    let image_path = PathBuf::from(std::env!("CARGO_MANIFEST_DIR"))
+        .join("target")
+        .join("bootimage-bill.bin");
 
-static HELLO: &[u8] = b"Hello World!";
+    let log_path = PathBuf::from(std::env!("CARGO_MANIFEST_DIR"))
+        .join("target")
+        .join("qemu.log");
 
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
+    let status = Command::new("qemu-system-x86_64")
+        .arg("-drive")
+        .arg(format!("format=raw,file={}", image_path.display()))
+        .arg("-serial")
+        .arg("file:target/serial.log")
+        .arg("-no-reboot")
+        .arg("-d")
+        .arg("int,cpu_reset")
+        .arg("-D")
+        .arg(log_path.to_str().unwrap())
+        .status()
+        .unwrap();
 
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
+    if !status.success() {
+        std::process::exit(status.code().unwrap_or(1));
     }
-
-    loop {}
-}
-
-#[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    loop {}
 }
