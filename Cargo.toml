@@ -1,3 +1,6 @@
+[workspace]
+members = ["runner"]
+
 [package]
 name = "bill"
 version = "0.1.1"

@@ -3,10 +3,28 @@
 version = 4
 
 [[package]]
+name = "bit_field"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e4b40c7323adcfc0a41c4b88143ed58346ff65a288fc144329c5c45e05d70c6"
+
+[[package]]
+name = "bitflags"
+version = "2.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b588b76d00fde79687d7646a9b5bdf3cc0f655e0bbd080335a95d7e96f3587da"
+
+[[package]]
 name = "bootloader_api"
 version = "0.11.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49f4c2ef60a76c1858ef43c30b6b95c2f5ee4d7c4f9bc47409c3a8dc8910adb9"
+
+[[package]]
+name = "const_fn"
+version = "0.4.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "413d67b29ef1021b4d60f4aa1e925ca031751e213832b4b1d588fae623c05c60"
 
 [[package]]
 name = "kernel"
@@ -14,10 +32,36 @@ version = "0.1.0"
 dependencies = [
  "bootloader_api",
  "spin",
+ "x86_64",
 ]
+
+[[package]]
+name = "rustversion"
+version = "1.0.23"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f"
 
 [[package]]
 name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
+
+[[package]]
+name = "volatile"
+version = "0.4.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "442887c63f2c839b346c192d047a7c87e73d0689c9157b00b53dcc27dd5ea793"
+
+[[package]]
+name = "x86_64"
+version = "0.15.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "be4ec631e1a81d50e46c35a4a00322bd076c47491b64c2fb10a7ffa89002c697"
+dependencies = [
+ "bit_field",
+ "bitflags",
+ "const_fn",
+ "rustversion",
+ "volatile",
+]
