@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-mono: var(--font-mono), monospace;
+  --font-sans: var(--font-sans), sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
+}
+
+:root {
+  --background: #000000;
+  --foreground: #f4f4f4;
+  --border: #1a1a1a;
+  --muted-foreground: #666666;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: #181818;
+  --muted-foreground: #666666;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+/* Subtle CRT monitor scanlines */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+  background-size: 100% 3px;
+  opacity: 0.25;
+}
+
+/* Custom Bento Box & Corner Bracket Borders */
+.bento-card {
+  position: relative;
+  background-color: #040404;
+  border: 1px solid #1c1c1c;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover {
+  border-color: #444444;
+  transform: translateY(-2px);
+}
+
+/* Reticle corner marks on hover */
+.bento-card::before,
+.bento-card::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
+  opacity: 0.3;
+  transition: opacity 0.25s ease, border-color 0.25s ease;
+}
+
+.bento-card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid #666;
+  border-left: 1px solid #666;
+}
+
+.bento-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid #666;
+  border-right: 1px solid #666;
+}
+
+.bento-card:hover::before,
+.bento-card:hover::after {
+  opacity: 1;
+  border-color: #ffffff;
+}
+
+/* Module accent glow effects */
+.bento-card[data-type="boot"]:hover {
+  box-shadow: 0 8px 30px -10px rgba(74, 222, 128, 0.12);
+}
+
+.bento-card[data-type="serial"]:hover {
+  box-shadow: 0 8px 30px -10px rgba(56, 189, 248, 0.12);
+}
+
+.bento-card[data-type="vga"]:hover {
+  box-shadow: 0 8px 30px -10px rgba(251, 191, 36, 0.12);
+}
+
+.bento-card[data-type="test"]:hover {
+  box-shadow: 0 8px 30px -10px rgba(248, 113, 113, 0.12);
+}
