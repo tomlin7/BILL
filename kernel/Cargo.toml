@@ -1,3 +1,5 @@
+[workspace]
+
 [package]
 name = "kernel"
 version = "0.1.0"
@@ -6,6 +8,10 @@ edition = "2021"
 [dependencies]
 bootloader_api = "0.11.17"
 spin = "0.5.2"
+x86_64 = "0.15.5"
+
+[lib]
+test = false
 
 [profile.dev]
 panic = "abort"

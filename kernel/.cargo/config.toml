@@ -2,6 +2,10 @@
 json-target-spec = true
 build-std-features = ["compiler-builtins-mem"]
 build-std = ["core", "compiler_builtins"]
+panic-abort-tests = true
 
 [build]
 target = "x86_64-bill.json"
+
+[target.'cfg(target_os = "none")']
+runner = "cmd /c run-test.bat"
